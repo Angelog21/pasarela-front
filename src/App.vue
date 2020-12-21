@@ -1,21 +1,14 @@
 <template>
   <div id="app">
-    <img src="./assets/logo.png">
-    <h1>{{ msg }}</h1>
-    <h2>Essential Links</h2>
-    <ul>
-      <li><a href="https://vuejs.org" target="_blank">Core Docs</a></li>
-      <li><a href="https://forum.vuejs.org" target="_blank">Forum</a></li>
-      <li><a href="https://chat.vuejs.org" target="_blank">Community Chat</a></li>
-      <li><a href="https://twitter.com/vuejs" target="_blank">Twitter</a></li>
-    </ul>
-    <h2>Ecosystem</h2>
-    <ul>
-      <li><a href="http://router.vuejs.org/" target="_blank">vue-router</a></li>
-      <li><a href="http://vuex.vuejs.org/" target="_blank">vuex</a></li>
-      <li><a href="http://vue-loader.vuejs.org/" target="_blank">vue-loader</a></li>
-      <li><a href="https://github.com/vuejs/awesome-vue" target="_blank">awesome-vue</a></li>
-    </ul>
+    <md-tabs class="md-transparent" md-alignment="fixed">
+      <md-tab id="tab-home" :md-active="isPath('/')" to="/" md-label="Inicio"></md-tab>
+      <md-tab id="tab-pages" :md-active="isPath('/client')" to="/client" md-label="Crear cliente"></md-tab>
+      <md-tab id="tab-posts" :md-active="isPath('/balance')" to="/balance" md-label="Consultar saldo"></md-tab>
+      <md-tab id="tab-posts2" :md-active="isPath('/balance')" to="/recharge" md-label="Realizar Recarga"></md-tab>
+      <md-tab id="tab-favorites" :md-active="isPath('/pay')" to="/pay" md-label="Realizar pago"></md-tab>
+    </md-tabs>
+    <h1 style="margin-top:100px;color:white;font-weight:bolder">Bienvenidos a la Pasarela de pagos</h1>
+    <router-view/>
   </div>
 </template>
 
@@ -23,8 +16,11 @@
 export default {
   name: 'app',
   data () {
-    return {
-      msg: 'Welcome to Your Vue.js App'
+    return {}
+  },
+  methods:{
+    isPath (path) {
+      return this.$route.path === path
     }
   }
 }
@@ -36,8 +32,23 @@ export default {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
+  padding: 0 10%;
   color: #2c3e50;
-  margin-top: 60px;
+}
+
+.md-button-content{
+  color: white !important;
+  font-weight: bold;
+}
+
+.md-button.md-active{
+  color: white !important;
+}
+
+body{
+  background-color: rgb(37, 37, 37);
+  background-repeat: no-repeat;
+  background-size: 100%;
 }
 
 h1, h2 {
