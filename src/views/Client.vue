@@ -14,6 +14,7 @@
                 <md-input name="first-name" id="first-name" autocomplete="given-name" v-model="form.firstName" :disabled="sending" />
                 <span class="md-error" v-if="!$v.form.firstName.required">El nombre es Requerido</span>
                 <span class="md-error" v-else-if="!$v.form.firstName.minlength">Nombre Invalido</span>
+                <span class="md-error" v-else-if="!$v.form.firstName.alpha">Nombre Invalido</span>
               </md-field>
             </div>
 
@@ -23,6 +24,7 @@
                 <md-input name="last-name" id="last-name" autocomplete="family-name" v-model="form.lastName" :disabled="sending" />
                 <span class="md-error" v-if="!$v.form.lastName.required">El apellido es Requerido</span>
                 <span class="md-error" v-else-if="!$v.form.lastName.minlength">Apellido Invalido</span>
+                <span class="md-error" v-else-if="!$v.form.lastName.alpha">Apellido Invalido</span>
               </md-field>
             </div>
           </div>
@@ -72,6 +74,9 @@ import {
     required,
     email,
     minLength,
+    numeric,
+    integer,
+    alpha,
     maxLength
   } from 'vuelidate/lib/validators'
 export default {
@@ -94,19 +99,23 @@ export default {
     validations: {
       form: {
         firstName: {
+          alpha,
           required,
           minLength: minLength(3)
         },
         lastName: {
+          alpha,
           required,
           minLength: minLength(3)
         },
         cedula: {
           required,
+          integer,
           maxLength: minLength(3)
         },
         phone: {
-          required
+          required,
+          integer
         },
         email: {
           required,
@@ -148,7 +157,7 @@ export default {
             if(error){
                 Swal.fire('Ups...', response.data.message, 'error')
             }else{
-                Swal.fire('Bien!', response.data, 'success')
+                Swal.fire('Cliente Registrado!', response.data.data, 'success')
             }
             this.sending = false;
             this.clearForm();

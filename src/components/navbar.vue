@@ -1,21 +1,16 @@
 <template>
-  <div id="app">
-    <navbar></navbar>
-    <h1 style="margin-top:100px;color:white;font-weight:bolder">Bienvenidos a la Pasarela de pagos</h1>
-    <router-view/>
-    <footerPage></footerPage>
-  </div>
+    <md-tabs class="md-transparent" md-alignment="fixed">
+      <md-tab to="/" md-label="Inicio"></md-tab>
+      <md-tab to="/client" md-label="Crear cliente"></md-tab>
+      <md-tab to="/balance" md-label="Consultar saldo"></md-tab>
+      <md-tab to="/recharge" md-label="Realizar Recarga"></md-tab>
+      <md-tab to="/pay" md-label="Realizar pago"></md-tab>
+    </md-tabs>
 </template>
 
 <script>
-import Navbar from './components/navbar';
-import FooterPage from './components/footer';
 export default {
-  components:{
-    Navbar,
-    FooterPage
-  },
-  name: 'app',
+  name: 'navbar',
   data () {
     return {}
   },

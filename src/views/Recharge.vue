@@ -14,6 +14,7 @@
                 <md-input id="cedula" name="cedula" autocomplete="cedula" v-model="form.cedula" :disabled="sending" />
                 <span class="md-error" v-if="!$v.form.cedula.required">La cedula es Requerida</span>
                 <span class="md-error" v-else-if="!$v.form.cedula.maxlength">Cedula Invalida</span>
+                <span class="md-error" v-else-if="!$v.form.cedula.integer">Cedula Invalida</span>
               </md-field>
             </div>
             <div class="md-layout-item md-small-size-100">
@@ -21,6 +22,7 @@
                   <label for="celular">Telefono</label>
                   <md-input type="celular" name="celular" id="celular" autocomplete="celular" v-model="form.phone" :disabled="sending" />
                   <span class="md-error" v-if="!$v.form.phone.required">El telefono es Requerido</span>
+                  <span class="md-error" v-if="!$v.form.phone.integer">El telefono es invalido</span>
               </md-field>
             </div>
           </div>
@@ -29,6 +31,7 @@
                     <label for="mount">Monto</label>
                     <md-input type="number" name="mount" id="mount" v-model="form.mount" :disabled="sending" />
                     <span class="md-error" v-if="!$v.form.mount.required">El monto es Requerido</span>
+                    <span class="md-error" v-if="!$v.form.mount.required">El monto debe ser un numero</span>
                 </md-field>
 
         </md-card-content>
@@ -50,6 +53,8 @@ import {
     required,
     email,
     minLength,
+    numeric,
+    integer,
     maxLength
   } from 'vuelidate/lib/validators'
 export default {
@@ -66,14 +71,17 @@ export default {
     validations: {
       form: {
         mount: {
-          required
+          required,
+          numeric
         },
         cedula: {
           required,
-          maxLength: minLength(3)
+          maxLength: minLength(3),
+          integer
         },
         phone: {
-          required
+          required,
+          integer
         }
       }
     },

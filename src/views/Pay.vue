@@ -57,6 +57,8 @@ import {
     required,
     email,
     minLength,
+    numeric,
+    integer,
     maxLength
   } from 'vuelidate/lib/validators'
 export default {
@@ -74,11 +76,13 @@ export default {
     validations: {
       form: {
         mount: {
-          required
+          required,
+          numeric
         },
         cedula: {
           required,
-          maxLength: minLength(3)
+          maxLength: minLength(3),
+          integer
         },
         descripcion: {
           required
